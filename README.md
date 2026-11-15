@@ -53,6 +53,18 @@ Every converter is a self-contained static HTML page. All parsing, flattening, e
 - YAML 1.2 compatible
 - Mobile-friendly with a touch dropdown nav
 
+## Design
+
+The site is built as a workshop: ink and paper, one blue tool, and a warm carrot accent that marks everything live.
+
+- **Blue** (`#2563EB`) is the tool — actions, links, the converter itself.
+- **Carrot orange** (`#F97316`) is the accent — deliberately scarce, roughly a tenth of the surface. It appears on the hero marker stroke, the live edge of the converter, the drop-target state, the trust-strip icons, the FAQ chevrons, the CTA stripe and the footer rule. If something is orange, it is doing something.
+- **JetBrains Mono** is the technical half of the voice — eyebrows, section labels, buttons, the trust strip, code blocks and empty states read as a spec sheet rather than marketing copy.
+- **Outfit** carries everything else: headings, ledes and body text.
+- The bunny sits behind the hero as a faint watermark, and hops when you hover the logo.
+
+All of this lives in one `Personality layer` block at the end of `style.css`, so the base stylesheet stays readable and the identity can be reworked in one place.
+
 ## Tech
 
 Plain HTML + CSS + vanilla JS. No build step.

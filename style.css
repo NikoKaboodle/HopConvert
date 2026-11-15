@@ -690,3 +690,223 @@ section .lede { color: var(--ink-700); font-size: 1.05rem; max-width: 640px; mar
 .wb-matrix th:not(:first-child), .wb-matrix td:not(:first-child) { text-align: center; width: auto; }
 .wb-matrix td:first-child { width: 24%; }
 .wb-matrix .yes { font-size: 0.8rem; }
+
+/* =========================================================
+   Personality layer
+   -------------------------------------------------------------
+   The site was doing one colour, one shape and one rhythm, which
+   is why it read like every other converter on the internet.
+   This layer gives it a voice without changing what it does:
+
+   - ink and paper, one blue tool, and a warm carrot accent that
+     marks everything live (the hero marker, the converter edge,
+     the drop target, the trust strip).
+   - monospace labels are the technical half of the voice.
+   - the bunny watermark puts the mascot back on the page.
+
+   The accent is deliberately scarce. Roughly a tenth of the
+   surface, used where it means something.
+   ========================================================= */
+
+:root {
+  --accent:     #F97316;
+  --accent-600: #EA580C;
+  --accent-700: #C2410C;
+  --accent-ink: #9A3412;
+  --accent-50:  #FFF7ED;
+  --accent-100: #FFEDD5;
+  --accent-200: #FED7AA;
+  --accent-300: #FDBA74;
+}
+
+/* ---------- Eyebrows: the label half of the voice ---------- */
+.section-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.75rem; font-weight: 500;
+  text-transform: lowercase; letter-spacing: 0.02em;
+  color: var(--accent-700);
+  margin-bottom: 10px;
+}
+.section-eyebrow::before {
+  content: "//"; color: var(--accent);
+  font-weight: 700; letter-spacing: -0.08em;
+}
+
+.eyebrow {
+  background: var(--white);
+  color: var(--ink-700);
+  border: 1px solid var(--ink-200);
+  box-shadow: var(--shadow-sm);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.72rem; font-weight: 500;
+  letter-spacing: 0.02em; text-transform: lowercase;
+}
+.eyebrow svg { width: 13px; height: 13px; color: var(--accent); }
+
+/* ---------- Hero: the bunny gets a job ---------- */
+.hero {
+  background:
+    radial-gradient(circle at 1px 1px, rgba(37, 99, 235, 0.07) 1px, transparent 0) 0 0 / 24px 24px,
+    linear-gradient(180deg, var(--blue-50) 0%, var(--white) 100%);
+}
+.hero-inner::before {
+  content: "";
+  position: absolute; top: -70px; right: -90px;
+  width: 440px; height: 440px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='%232563EB'%3E%3Cellipse cx='35' cy='25' rx='8' ry='20'/%3E%3Cellipse cx='65' cy='25' rx='8' ry='20'/%3E%3Ccircle cx='50' cy='60' r='25'/%3E%3C/svg%3E") no-repeat center / contain;
+  opacity: 0.055; transform: rotate(-10deg);
+  pointer-events: none; z-index: -1;
+}
+@media (max-width: 980px) { .hero-inner::before { display: none; } }
+
+/* The accent words get a marker stroke, like a note in a margin. */
+.hero h1 .accent {
+  color: var(--blue-700);
+  background-image: linear-gradient(var(--accent-200), var(--accent-200));
+  background-repeat: no-repeat;
+  background-size: 100% 0.26em;
+  background-position: 0 86%;
+  padding: 0 0.06em;
+}
+
+.hero p.lede { color: var(--ink-700); }
+
+/* ---------- Converter: the live edge ---------- */
+.converter { position: relative; }
+.converter::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; z-index: 3;
+  background: linear-gradient(90deg, var(--blue-600) 0%, var(--blue-500) 55%, var(--accent) 100%);
+}
+.converter-bar-title {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.78rem; letter-spacing: 0.02em;
+}
+
+/* ---------- Buttons: they lift, they do not bounce ---------- */
+.btn {
+  transition: transform .16s ease, box-shadow .16s ease, background .16s ease, border-color .16s ease, color .16s ease;
+}
+.btn-primary {
+  box-shadow: 0 1px 2px rgba(37, 99, 235, 0.24), 0 8px 18px -10px rgba(37, 99, 235, 0.55);
+}
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.24), 0 12px 24px -12px rgba(37, 99, 235, 0.6);
+}
+.btn-secondary:hover { transform: translateY(-1px); border-color: var(--blue-200); color: var(--blue-700); }
+
+/* ---------- The drop target announces itself ---------- */
+.upload-zone svg { transition: transform .22s cubic-bezier(.34, 1.56, .64, 1), color .16s ease; }
+.upload-zone:hover svg { color: var(--blue-600); transform: translateY(-2px); }
+.upload-zone.dragover { background: var(--accent-50); box-shadow: inset 0 0 0 2px var(--accent-200); }
+.upload-zone.dragover svg { color: var(--accent); transform: translateY(-4px); }
+
+/* ---------- Trust strip: a spec sheet, not a badge wall ---------- */
+.trust {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.72rem; letter-spacing: 0.04em;
+  text-transform: lowercase; gap: 28px;
+}
+.trust-item { gap: 8px; }
+.trust-item svg { width: 15px; height: 15px; color: var(--accent); }
+.trust-verify { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.75rem; }
+
+/* ---------- Results and notes ---------- */
+.results-empty {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.8rem; letter-spacing: 0.01em;
+}
+.out-note {
+  background: var(--accent-50);
+  border-bottom-color: var(--accent-200);
+  color: var(--accent-ink);
+}
+
+/* ---------- FAQ: the chevron is the accent ---------- */
+.faq summary::after { border-right-color: var(--accent); border-bottom-color: var(--accent); }
+.faq details[open] { border-color: var(--accent-200); }
+.faq summary:hover { background: var(--accent-50); }
+
+/* ---------- CTA: the last thing on the page gets the carrot stripe ---------- */
+.cta-band {
+  background:
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.13) 1px, transparent 0) 0 0 / 18px 18px,
+    linear-gradient(135deg, var(--blue-600), var(--blue-800));
+}
+.cta-band h2::after {
+  content: ""; display: block; width: 44px; height: 4px;
+  margin: 12px auto 0; background: var(--accent); border-radius: 2px;
+}
+
+/* ---------- Code blocks look like terminals now ---------- */
+.code-block { box-shadow: inset 0 3px 0 var(--accent); }
+
+/* ---------- Guide contents ---------- */
+.guide-toc { background: var(--accent-50); border-color: var(--accent-200); }
+.guide-toc strong {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.72rem; text-transform: lowercase; letter-spacing: 0.03em;
+  color: var(--accent-700);
+}
+.guide-toc a {
+  font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.78rem;
+  background: var(--white); border-color: var(--accent-200); color: var(--accent-ink);
+}
+.guide-toc a:hover { background: var(--accent-600); border-color: var(--accent-600); color: var(--white); }
+
+/* ---------- Footer: the stripe that ends the page ---------- */
+.site-footer { border-top: 3px solid var(--accent); }
+.footer-col h4 {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
+}
+.footer-col a:hover { color: var(--accent-300); }
+.footer-bottom {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.72rem; letter-spacing: 0.02em;
+}
+
+/* ---------- Workbench: the format bar is the loudest part ---------- */
+.wb-field label { color: var(--accent-700); font-family: 'JetBrains Mono', ui-monospace, monospace; }
+.wb-detected { border-color: var(--accent-200); color: var(--accent-ink); background: var(--accent-50); }
+
+/* ---------- The tool itself: an instrument panel, not a web form ---------- */
+.converter-bar {
+  background: linear-gradient(180deg, var(--white), var(--accent-50));
+  border-bottom-color: var(--accent-200);
+}
+.converter-bar-title .dot { box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.16); }
+.paste-zone .paste-hint {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.72rem; letter-spacing: 0.01em;
+}
+.paste-zone .paste-hint button { font-family: inherit; color: var(--accent-700); }
+.paste-zone .paste-hint button:hover { color: var(--accent-600); }
+.converter-foot .meta {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.75rem; letter-spacing: 0.01em;
+}
+.btn {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.85rem; letter-spacing: 0.01em;
+}
+.icon-btn { transition: background .16s ease, color .16s ease, box-shadow .16s ease; }
+.upload-zone strong { letter-spacing: -0.01em; }
+.upload-zone small { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.72rem; }
+
+/* ---------- Small, sharp details ---------- */
+::selection { background: var(--accent-200); color: var(--ink-900); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.logo-mark { transition: transform .28s cubic-bezier(.34, 1.56, .64, 1); }
+.logo:hover .logo-mark { transform: translateY(-3px) rotate(-7deg); }
+
+/* ---------- Respect anyone who asked the machine to stop ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}

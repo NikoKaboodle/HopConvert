@@ -17,11 +17,11 @@ style.css cache version
 The same four-hour browser cache applies to the stylesheet, and the ad slot
 rules live there, so the stylesheet is versioned the same way:
 
-  <link rel="stylesheet" href="style.css?v=20261115-1" />
+  <link rel="stylesheet" href="style.css?v=20261115-2" />
 
 Bump it in the same commit as any change to style.css.
 
-Current version: 20261115-1
+Current version: 20261115-2
 
 Shared module cache versions
 
