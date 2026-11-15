@@ -10,8 +10,9 @@ Thumbs.db
 
 # Deploy keys — never commit
 *.pem
-bunnyconvert_deploy_key
-bunnyconvert_deploy_key.pub
+# any local deploy key, whatever it is named
+*_deploy_key
+*_deploy_key.pub
 
 # Build-time generators (not part of the deployed site)
 gen-og.ps1
@@ -49,6 +50,7 @@ _server.err
 adversarial.html
 _adtest.html
 _landingcheck.html
+_wbcheck.html
 regress.html
 privacydiag.html
 patch-index.ps1
@@ -68,4 +70,7 @@ patch-examples.ps1
 patch-xml-attrs.ps1
 patch-adbox.ps1
 bugscan.ps1
+patch-workbench.ps1
+patch-workbench-nav.ps1
+patch-nav-fix.ps1
 patch-fixes.ps1

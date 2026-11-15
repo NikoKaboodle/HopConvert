@@ -27,9 +27,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="style.css?v=20261112-5" />
+<link rel="stylesheet" href="style.css?v=20261115-1" />
 <script src="nav.js" defer></script>
 <script src="hop-common.js?v=20261112-3"></script>
+<script src="hop-xml.js?v=20261115-1"></script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2033283931778605" crossorigin="anonymous"></script>
 
 <script type="application/ld+json">
@@ -254,8 +255,8 @@
             <a href="csv-to-json-type-inference.html">CSV to JSON type inference</a>
           </div>
         </div>
-        </div>
       </div>
+      <a href="workbench.html">Workbench</a>
       <a href="#faq">FAQ</a>
       <a href="#convert" class="nav-cta">Convert Now</a>
     </nav>
@@ -763,6 +764,7 @@
     <div class="footer-bottom">
       <span>&copy; 2024–2026 HopConvert. All rights reserved.</span>
       <div style="display: flex; gap: 20px;">
+        <a href="workbench.html">Workbench</a>
         <a href="privacy.html">Privacy</a>
         <a href="terms.html">Terms</a>
       </div>
@@ -858,114 +860,6 @@
 
   const SAMPLE = '<?xml version="1.0" encoding="UTF-8"?>\n<catalog>\n  <book id="1" lang="en">\n    <title>The Pragmatic Programmer</title>\n    <author>Andy Hunt</author>\n    <year>1999</year>\n    <price>42.50</price>\n  </book>\n  <book id="2" lang="en">\n    <title>Clean Code</title>\n    <author>Robert Martin</author>\n    <year>2008</year>\n    <price>38.00</price>\n  </book>\n  <book id="3" lang="en">\n    <title>Refactoring</title>\n    <author>Martin Fowler</author>\n    <year>2018</year>\n    <price>45.00</price>\n  </book>\n</catalog>';
 
-  // ============ XML PARSER ============
-  function stripBom(s) { return s.charCodeAt(0) === 0xFEFF ? s.slice(1) : s; }
-
-  function parseXml(text) {
-    text = stripBom(text);
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(text, 'application/xml');
-    const err = doc.querySelector('parsererror');
-    if (err) throw new Error('Invalid XML: ' + (err.textContent || '').slice(0, 200));
-    return doc;
-  }
-
-  function localName(name) {
-    if (state.stripNs && name.indexOf(':') !== -1) return name.split(':').pop();
-    return name;
-  }
-
-  function detectRowElement(doc) {
-    const root = doc.documentElement;
-    const counts = {};
-    for (const child of root.children) {
-      const n = localName(child.tagName);
-      counts[n] = (counts[n] || 0) + 1;
-    }
-    let best = null, bestCount = 0;
-    for (const k in counts) {
-      if (counts[k] > bestCount) { best = k; bestCount = counts[k]; }
-    }
-    return best;
-  }
-
-  function findRowElements(doc, rowName) {
-    const root = doc.documentElement;
-    const out = [];
-    function walk(node) {
-      for (const child of node.children) {
-        if (localName(child.tagName) === rowName) out.push(child);
-        else walk(child);
-      }
-    }
-    walk(root);
-    if (out.length > 0) return out;
-    // Fallback: any child of root with the row name
-    for (const child of root.children) {
-      if (localName(child.tagName) === rowName) out.push(child);
-    }
-    return out;
-  }
-
-  function getText(node) {
-    let s = '';
-    for (const child of node.childNodes) {
-      if (child.nodeType === 3) s += child.nodeValue;
-      else if (child.nodeType === 1) s += getText(child);
-    }
-    return s;
-  }
-
-  function flattenElement(node, prefix, sep) {
-    const out = {};
-    if (state.includeAttrs) {
-      for (const attr of node.attributes) {
-        out[prefix + '@' + localName(attr.name)] = attr.value;
-      }
-    }
-    const children = {};
-    const order = [];
-    for (const child of node.children) {
-      const n = localName(child.tagName);
-      if (!children[n]) { children[n] = []; order.push(n); }
-      children[n].push(child);
-    }
-    for (const n of order) {
-      const key = prefix ? prefix + sep + n : n;
-      if (children[n].length === 1) {
-        const child = children[n][0];
-        const hasChildren = child.children.length > 0;
-        if (hasChildren) {
-          const sub = flattenElement(child, key, sep);
-          for (const k in sub) out[k] = sub[k];
-        } else {
-          out[key] = getText(child);
-          // A leaf element can carry the value that matters - an Atom
-          // <link href="..."> is the URL and nothing else - so its
-          // attributes become their own columns instead of being dropped.
-          if (state.includeAttrs) {
-            for (const attr of child.attributes) {
-              out[key + sep + '@' + localName(attr.name)] = attr.value;
-            }
-          }
-        }
-      } else {
-        out[key] = children[n].map(c => getText(c) || (c.children.length ? JSON.stringify(toObject(c)) : '')).join(' | ');
-      }
-    }
-    return out;
-  }
-
-  function toObject(node) {
-    const out = {};
-    if (state.includeAttrs) for (const attr of node.attributes) out['@' + localName(attr.name)] = attr.value;
-    for (const child of node.children) {
-      const n = localName(child.tagName);
-      out[n] = child.children.length > 0 ? toObject(child) : getText(child);
-    }
-    return out;
-  }
-
   function escapeCsv(v, delim) {
     if (v === null || v === undefined) return '';
     const s = String(v);
@@ -976,23 +870,20 @@
   }
 
   function xmlToCsv(text, opts) {
-    const doc = parseXml(text);
-    const rowName = opts.rowElement || detectRowElement(doc);
-    if (!rowName) throw new Error('Could not detect a repeating row element. Set one in settings.');
-    const rows = findRowElements(doc, rowName);
-    if (rows.length === 0) throw new Error('No elements named <' + rowName + '> found in the document.');
+    const res = window.HopXml.toRows(text, {
+      rowElement: opts.rowElement,
+      nestedSep: opts.nestedSep,
+      stripNs: opts.stripNs,
+      includeAttrs: opts.includeAttrs
+    });
 
-    const flatRows = rows.map(r => flattenElement(r, '', opts.nestedSep));
-    const keySet = new Set();
-    flatRows.forEach(r => Object.keys(r).forEach(k => keySet.add(k)));
-    const headers = Array.from(keySet);
-
+    const headers = res.headers;
     const lines = [headers.map(h => escapeCsv(h, opts.delimiter)).join(opts.delimiter)];
-    flatRows.forEach(r => {
+    res.rows.forEach(r => {
       lines.push(headers.map(h => escapeCsv(r[h] || '', opts.delimiter)).join(opts.delimiter));
     });
 
-    return { csv: lines.join('\n'), rowName, rows: flatRows.length, columns: headers.length };
+    return { csv: lines.join('\n'), rowName: res.rowName, rows: res.rows.length, columns: headers.length };
   }
 
   // ============ RENDER ============

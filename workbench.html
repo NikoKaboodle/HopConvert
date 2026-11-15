@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#2563EB" />
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+<meta name="googlebot" content="index, follow" />
+<meta name="format-detection" content="telephone=no" />
+
+<title>Conversion Workbench — Any Format to Any Format | HopConvert</title>
+<meta name="description" content="Drop a JSON, JSONL, CSV, XML or YAML file and convert it to CSV, JSON, YAML, SQL, Markdown or Excel. Free, instant, private, all in your browser." />
+<meta name="keywords" content="data converter, conversion workbench, json to csv, csv to json, xml to csv, yaml to json, json to sql, json to excel, format converter" />
+<meta name="author" content="HopConvert" />
+<link rel="canonical" href="https://hopconvert.com/workbench.html" />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='b' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2360A5FA'/%3E%3Cstop offset='1' stop-color='%232563EB'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cellipse cx='35' cy='25' rx='8' ry='20' fill='url(%23b)'/%3E%3Cellipse cx='65' cy='25' rx='8' ry='20' fill='url(%23b)'/%3E%3Ccircle cx='50' cy='60' r='25' fill='url(%23b)'/%3E%3Cellipse cx='35' cy='25' rx='3' ry='12' fill='%23DBEAFE'/%3E%3Cellipse cx='65' cy='25' rx='3' ry='12' fill='%23DBEAFE'/%3E%3Ccircle cx='42' cy='58' r='2.5' fill='%231E3A8A'/%3E%3Ccircle cx='58' cy='58' r='2.5' fill='%231E3A8A'/%3E%3Cellipse cx='50' cy='66' rx='2' ry='1.5' fill='%231E3A8A'/%3E%3C/svg%3E" />
+<link rel="apple-touch-icon" sizes="180x180" href="https://hopconvert.com/apple-touch-icon.png" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="HopConvert" />
+<meta property="og:title" content="Conversion Workbench — Any Format to Any Format" />
+<meta property="og:description" content="Drop a file in any format and convert it to CSV, JSON, YAML, SQL, Markdown or Excel. Runs entirely in your browser." />
+<meta property="og:url" content="https://hopconvert.com/workbench.html" />
+<meta property="og:locale" content="en_US" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Conversion Workbench — Any Format to Any Format" />
+<meta name="twitter:description" content="One drop zone, every format. JSON, JSONL, CSV, XML and YAML in; CSV, JSON, YAML, SQL, Markdown and Excel out." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css?v=20261115-1" />
+<script src="nav.js" defer></script>
+<script src="hop-common.js?v=20261112-3"></script>
+<script src="hop-xlsx.js?v=20261115-1"></script>
+<script src="hop-xml.js?v=20261115-1"></script>
+<script src="hop-yaml.js?v=20261115-1"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2033283931778605" crossorigin="anonymous"></script>
+
+<!-- Schema.org: SoftwareApplication -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "HopConvert Conversion Workbench",
+  "applicationCategory": "UtilitiesApplication",
+  "applicationSubCategory": "Data Conversion Tool",
+  "operatingSystem": "Any (Web Browser)",
+  "browserRequirements": "Requires JavaScript. Requires HTML5.",
+  "url": "https://hopconvert.com/workbench.html",
+  "description": "A single browser-based workbench that converts JSON, JSONL, CSV, XML and YAML into CSV, JSON, YAML, SQL, Markdown or Excel, with the format detected automatically.",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock"
+  },
+  "featureList": [
+    "Automatic input format detection",
+    "JSON, JSONL, CSV, TSV, XML and YAML input",
+    "CSV, JSON, YAML, SQL, Markdown and .xlsx output",
+    "Real .xlsx workbook with typed cells",
+    "Nested object flattening",
+    "CSV type inference",
+    "Live preview",
+    "No file upload to server (privacy)"
+  ]
+}
+</script>
+
+<!-- Schema.org: HowTo -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Convert Any Data Format in the HopConvert Workbench",
+  "description": "Convert JSON, JSONL, CSV, XML or YAML into CSV, JSON, YAML, SQL, Markdown or Excel in three steps, entirely in your browser.",
+  "totalTime": "PT1M",
+  "estimatedCost": {
+    "@type": "MonetaryAmount",
+    "currency": "USD",
+    "value": "0"
+  },
+  "tool": [
+    { "@type": "HowToTool", "name": "Web browser" },
+    { "@type": "HowToTool", "name": "HopConvert Workbench (free, no sign-up)" }
+  ],
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Drop in your file",
+      "text": "Drag a .json, .jsonl, .csv, .tsv, .xml or .yaml file onto the drop zone, or paste the text straight into the box. The format is detected automatically.",
+      "url": "https://hopconvert.com/workbench.html#convert",
+      "position": 1
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Pick the target format",
+      "text": "Choose where the data should go: CSV, JSON, YAML, SQL, Markdown or a real Excel .xlsx workbook. Open the settings cog to change the delimiter, SQL dialect, YAML indent or column alignment.",
+      "position": 2
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Preview and download",
+      "text": "The preview updates instantly. Check the rows and columns, then copy the result or download it as a file.",
+      "position": 3
+    }
+  ]
+}
+</script>
+
+<!-- Schema.org: FAQPage -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the HopConvert Workbench?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The HopConvert Workbench is one page that converts between the data formats developers actually use. You drop in a file, the format is detected for you, you pick the target format, and you get the result. It understands JSON, JSONL, CSV, TSV, XML and YAML on the way in, and CSV, JSON, YAML, SQL, Markdown and Excel on the way out. It is free, needs no sign-up, and runs entirely in your browser."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which formats can it convert?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "On the input side the workbench reads JSON, JSON Lines, CSV, TSV, XML and YAML. On the output side it writes CSV, JSON, YAML, SQL INSERT statements, Markdown tables and real .xlsx workbooks. That is 30 working combinations, and every one of them is handled by the same engines that power the individual converter pages, so the answers never disagree."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the workbench detect the file format automatically?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The workbench looks at the file extension first, then at the content itself: text starting with an angle bracket is XML, text that parses as a single JSON document is JSON, a file where every line is its own JSON object is JSON Lines, and text that parses as a YAML mapping is YAML. Anything left over is treated as CSV or TSV, with the delimiter detected from the header row. You can always override the source format by hand if the guess is wrong."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my data uploaded anywhere?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Parsing, flattening and serialisation all happen on your own machine using JavaScript. Your file is read with the browser's FileReader API and never transmitted to a server. There is no backend on HopConvert that could see your data, and no analytics script runs during a conversion."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the Excel output a real spreadsheet?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The Excel target generates a genuine .xlsx workbook - a zipped SpreadsheetML file - in your browser. Numbers stay numbers and booleans stay booleans, so a leading-zero postcode or a long account number does not get mangled the way it would in a plain CSV import."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens to nested objects and arrays?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "When a tabular target such as CSV, Excel, SQL or Markdown is chosen, nested objects are flattened into one column per leaf and nested keys are joined with a double underscore, so address.city becomes address__city. Arrays of simple values are joined with a pipe, so a list of skills becomes SQL | Python. When JSON or YAML is the target, the original structure is preserved exactly as it came in."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the workbench free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The HopConvert Workbench is 100% free with no sign-up, no paid tier and no feature gates. Every converter on the site is free forever, because the work happens in your browser and there is no server bill to pass on."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- Schema.org: WebPage -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "https://hopconvert.com/workbench.html#webpage",
+  "url": "https://hopconvert.com/workbench.html",
+  "name": "Conversion Workbench — Any Format to Any Format",
+  "isPartOf": { "@type": "WebSite", "name": "HopConvert", "url": "https://hopconvert.com/" },
+  "datePublished": "2026-11-15",
+  "dateModified": "2026-11-15",
+  "inLanguage": "en-US"
+}
+</script>
+
+<!-- Schema.org: BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://hopconvert.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Conversion Workbench",
+      "item": "https://hopconvert.com/workbench.html"
+    }
+  ]
+}
+</script>
+
+<!-- Schema.org: WebSite -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://hopconvert.com/#website",
+  "url": "https://hopconvert.com/",
+  "name": "HopConvert",
+  "description": "Free browser-based converters for JSON, CSV, XML, and YAML. No sign-up, no upload, no limits.",
+  "inLanguage": "en-US",
+  "publisher": { "@type": "Organization", "name": "HopConvert", "url": "https://hopconvert.com/", "logo": { "@type": "ImageObject", "url": "https://hopconvert.com/apple-touch-icon.png", "width": 180, "height": 180 } }
+}
+</script>
+
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image" content="https://hopconvert.com/og/workbench.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="HopConvert Workbench - convert JSON, CSV, XML and YAML to any format" />
+<meta name="twitter:image" content="https://hopconvert.com/og/workbench.png" />
+<meta name="twitter:image:alt" content="HopConvert Workbench - convert JSON, CSV, XML and YAML to any format" />
+<link rel="sitemap" type="application/xml" href="https://hopconvert.com/sitemap.xml" />
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<!-- Header -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo" aria-label="HopConvert home">
+      <svg class="logo-mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="logoGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#60A5FA"/>
+            <stop offset="1" stop-color="#2563EB"/>
+          </linearGradient>
+        </defs>
+        <ellipse cx="35" cy="25" rx="8" ry="20" fill="url(#logoGrad)"/>
+        <ellipse cx="65" cy="25" rx="8" ry="20" fill="url(#logoGrad)"/>
+        <circle cx="50" cy="60" r="25" fill="url(#logoGrad)"/>
+        <ellipse cx="35" cy="25" rx="3" ry="12" fill="#DBEAFE"/>
+        <ellipse cx="65" cy="25" rx="3" ry="12" fill="#DBEAFE"/>
+        <circle cx="42" cy="58" r="2.5" fill="#1E3A8A"/>
+        <circle cx="58" cy="58" r="2.5" fill="#1E3A8A"/>
+        <ellipse cx="50" cy="66" rx="2" ry="1.5" fill="#1E3A8A"/>
+      </svg>
+      <span>HopConvert</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <nav class="nav" id="primaryNav" aria-label="Primary">
+      <div class="nav-dropdown">
+        <button class="nav-trigger" aria-haspopup="true" aria-expanded="false">
+          Converters
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="nav-dropdown-menu" role="menu">
+          <div class="nav-dropdown-group">
+            <h4>Converters</h4>
+            <a href="index.html">JSON to CSV</a>
+            <a href="csv-to-json.html">CSV to JSON</a>
+            <a href="xml-to-csv.html">XML to CSV</a>
+            <a href="json-to-yaml.html">JSON to YAML</a>
+            <a href="yaml-to-json.html">YAML to JSON</a>
+            <a href="jsonl-to-csv.html">JSONL to CSV</a>
+            <a href="json-to-sql.html">JSON to SQL</a>
+            <a href="json-to-markdown.html">JSON to Markdown</a>
+            <a href="json-to-excel.html">JSON to Excel</a>
+          </div>
+          <div class="nav-dropdown-group">
+            <h4>Guides</h4>
+            <a href="json-to-csv-guide.html">JSON to CSV guide</a>
+            <a href="csv-to-json-guide.html">CSV to JSON guide</a>
+            <a href="xml-to-csv-guide.html">XML to CSV guide</a>
+            <a href="json-to-yaml-guide.html">JSON to YAML guide</a>
+            <a href="yaml-to-json-guide.html">YAML to JSON guide</a>
+            <a href="jsonl-to-csv-guide.html">JSONL to CSV guide</a>
+            <a href="json-to-sql-guide.html">JSON to SQL guide</a>
+            <a href="json-to-markdown-guide.html">JSON to Markdown guide</a>
+            <a href="json-to-excel-guide.html">JSON to Excel guide</a>
+          </div>
+          <div class="nav-dropdown-group">
+            <h4>By task</h4>
+            <a href="json-to-csv-python.html">JSON to CSV in Python</a>
+            <a href="json-array-to-csv.html">JSON array to CSV</a>
+            <a href="json-to-csv-nested-objects.html">JSON to CSV nested objects</a>
+            <a href="json-to-csv-without-uploading.html">JSON to CSV without uploading</a>
+            <a href="json-to-csv-excel.html">JSON to CSV for Excel</a>
+            <a href="yaml-to-json-kubernetes.html">YAML to JSON for Kubernetes</a>
+            <a href="xml-to-csv-rss.html">XML to CSV for RSS</a>
+            <a href="csv-to-json-type-inference.html">CSV to JSON type inference</a>
+          </div>
+        </div>
+      </div>
+      <a href="workbench.html" class="current">Workbench</a>
+      <a href="#faq">FAQ</a>
+      <a href="#convert" class="nav-cta">Convert Now</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- Hero + Workbench -->
+<section class="hero" id="convert" style="padding-top: 56px; padding-bottom: 64px;">
+  <div class="container hero-inner">
+    <span class="eyebrow">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      One tool · every format · still free
+    </span>
+    <h1>Conversion Workbench — <span class="accent">drop it, pick a target</span></h1>
+    <p class="lede">Drop a file in any format and choose where it should go. JSON, JSONL, CSV, XML and YAML in; CSV, JSON, YAML, SQL, Markdown and Excel out. Everything runs in your browser.</p>
+
+    <div class="converter" role="region" aria-label="Conversion workbench">
+      <div class="converter-bar">
+        <div class="converter-bar-title">
+          <span class="dot" aria-hidden="true"></span>
+          Workbench — Ready
+        </div>
+        <div class="converter-bar-actions">
+          <button class="icon-btn" id="settingsBtn" aria-label="Open settings" title="Settings">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0 .33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="wb-formats">
+        <div class="wb-field">
+          <label for="wbSource">From</label>
+          <select id="wbSource"></select>
+        </div>
+        <div class="wb-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 19 12"/><polyline points="13 6 19 12 13 18"/></svg>
+        </div>
+        <div class="wb-field">
+          <label for="wbTarget">To</label>
+          <select id="wbTarget"></select>
+        </div>
+        <div class="wb-field" id="wbDelimField">
+          <label for="wbOutDelim">Delimiter</label>
+          <select id="wbOutDelim"></select>
+        </div>
+        <div class="wb-detected">
+          <span id="wbDetected">Detected: -</span>
+        </div>
+      </div>
+
+      <div class="input-row">
+        <label class="upload-zone" id="uploadZone" for="fileInput">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <strong>Drop any data file</strong>
+          <small>or click to browse · .json .jsonl .csv .tsv .xml .yaml</small>
+          <input type="file" id="fileInput" class="upload-input" accept=".json,.jsonl,.ndjson,.csv,.tsv,.xml,.yaml,.yml,application/json,text/csv,text/xml,application/xml,application/yaml" />
+        </label>
+        <div class="paste-zone">
+          <label for="wbInput" class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;">Paste data</label>
+          <textarea id="wbInput" placeholder="…or paste JSON, JSONL, CSV, XML or YAML" spellcheck="false" autocomplete="off"></textarea>
+          <div class="paste-hint">
+            <span id="parseStatus">Awaiting input</span>
+            <button type="button" id="loadSample">Load sample</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="errorBox" class="error-msg" role="alert" aria-live="polite"></div>
+
+      <div id="results" class="results" aria-live="polite" aria-label="Conversion preview">
+        <div id="resultsEmpty" class="results-empty">Your converted output will appear here.</div>
+      </div>
+
+      <div class="converter-foot">
+        <div class="meta">
+          <span><strong id="rowCount">0</strong> rows</span>
+          <span><strong id="colCount">0</strong> columns</span>
+          <span id="wbFormatLabel">Input to output</span>
+        </div>
+        <div class="actions">
+          <button class="btn btn-secondary" id="resetBtn" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+            Reset
+          </button>
+          <button class="btn btn-secondary" id="copyBtn" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span id="wbCopyLabel">Copy CSV</span>
+          </button>
+          <button class="btn btn-primary" id="downloadBtn" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span id="wbDownloadLabel">Download CSV</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Trust strip -->
+<div class="trust" aria-label="Why trust HopConvert">
+  <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Browser-only processing</div>
+  <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> No file upload to server</div>
+  <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Format detected for you</div>
+  <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> 100% free forever</div>
+</div>
+
+<div class="ad-slot ad-slot--banner" aria-label="Advertisement">
+  <div class="ad-slot__box">
+    <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-2033283931778605"
+       data-ad-format="horizontal"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</div>
+
+<!-- What the workbench does -->
+<section>
+  <div class="container content-block">
+    <span class="section-eyebrow">The basics</span>
+    <h2>One tool for the whole format mess</h2>
+    <p>Every project starts with data in a format you did not choose. An API hands you JSON. A Kubernetes manifest arrives as YAML. A partner sends an RSS feed. Somebody exports a spreadsheet as CSV. The dedicated converters on this site each solve one of those problems properly — but the moment you need <strong>XML to SQL</strong>, or <strong>CSV to YAML</strong>, or <strong>JSONL to Excel</strong>, you are back to a search box.</p>
+    <p>The workbench is that missing tool. There is one drop zone and one target picker. Drop a file in, the format is detected for you, and you choose where the data should go. Thirty combinations work, all of them handled by the same engines that power the individual converter pages — so the workbench and the dedicated tools always give you the same answer.</p>
+    <p>Like everything else on HopConvert, it is free, it needs no account, and your data never leaves your machine. If you would rather have one page per job, the <a href="index.html">JSON to CSV converter</a> and the <a href="csv-to-json.html">CSV to JSON converter</a> are still the fastest route — the workbench is for the days when the job changes shape.</p>
+  </div>
+</section>
+
+<div class="ad-slot ad-slot--rect" aria-label="Advertisement">
+  <div class="ad-slot__box">
+    <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-2033283931778605"
+       data-ad-format="rectangle"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</div>
+
+<!-- Format matrix -->
+<section style="background: var(--ink-50);">
+  <div class="container">
+    <div class="content-block">
+      <span class="section-eyebrow">Coverage</span>
+      <h2>Every format in, every format out</h2>
+      <p>Six input formats, six output formats, no dead ends. Tabular targets (CSV, Excel, SQL, Markdown) flatten nested objects into columns, while JSON and YAML targets hand back your original structure exactly as it came in.</p>
+    </div>
+    <div class="compare wb-matrix">
+      <table>
+        <thead>
+          <tr>
+            <th>From ↓ &nbsp;/&nbsp; To →</th>
+            <th>CSV</th>
+            <th>JSON</th>
+            <th>YAML</th>
+            <th>SQL</th>
+            <th>Markdown</th>
+            <th>Excel</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>JSON</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+          <tr><td>JSONL</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+          <tr><td>CSV / TSV</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+          <tr><td>XML</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+          <tr><td>YAML</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- How to use -->
+<section>
+  <div class="container">
+    <div class="content-block">
+      <span class="section-eyebrow">How it works</span>
+      <h2>Three steps, no settings to learn</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <h3>Drop the file in</h3>
+        <p>Drag a file onto the drop zone or paste the text. The workbench reads the extension and the content itself, so it knows whether it is looking at JSON, JSON Lines, CSV, TSV, XML or YAML.</p>
+      </div>
+      <div class="step">
+        <h3>Pick where it should go</h3>
+        <p>Choose the target format. Open the settings cog if you want a different delimiter, a MySQL or PostgreSQL dialect, a different YAML indent, or a named Excel sheet.</p>
+      </div>
+      <div class="step">
+        <h3>Copy or download</h3>
+        <p>The preview updates as you type. Copy the result straight to the clipboard, or download it as a file with the right name and extension.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why -->
+<section style="background: var(--ink-50);">
+  <div class="container">
+    <div class="content-block">
+      <span class="section-eyebrow">Why bother</span>
+      <h2>Built on the same engines as the converters</h2>
+      <p>The workbench is not a separate implementation that happens to look similar. It calls the same flattening, escaping, type inference and serialisation code as the individual tools, so a CSV produced here opens exactly like a CSV produced by the <a href="index.html">JSON to CSV converter</a>, and a YAML file produced here is byte-for-byte what the <a href="json-to-yaml.html">JSON to YAML converter</a> would give you.</p>
+    </div>
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
+        <h3>Drag and drop</h3>
+        <p>Drop the file anywhere on the drop zone. No dialog, no upload progress bar, no waiting for a server.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <h3>Format detected</h3>
+        <p>The workbench reads the extension and the content, then tells you what it thinks it is. You can always override it.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div>
+        <h3>Real .xlsx output</h3>
+        <p>The Excel target builds an actual spreadsheet, with numbers typed as numbers and the header row frozen.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3>Nothing uploaded</h3>
+        <p>Your file is read locally by the browser. There is no server behind this page that could see it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" style="background: var(--ink-50);">
+  <div class="container">
+    <div class="content-block">
+      <span class="section-eyebrow">FAQ</span>
+      <h2>Frequently asked questions</h2>
+    </div>
+    <div class="faq">
+      <details>
+        <summary>What is the HopConvert Workbench?</summary>
+        <div class="answer">The HopConvert Workbench is one page that converts between the data formats developers actually use. You drop in a file, the format is detected for you, you pick the target format, and you get the result. It understands JSON, JSONL, CSV, TSV, XML and YAML on the way in, and CSV, JSON, YAML, SQL, Markdown and Excel on the way out. It is free, needs no sign-up, and runs entirely in your browser.</div>
+      </details>
+      <details>
+        <summary>Which formats can it convert?</summary>
+        <div class="answer">On the input side the workbench reads JSON, JSON Lines, CSV, TSV, XML and YAML. On the output side it writes CSV, JSON, YAML, SQL INSERT statements, Markdown tables and real .xlsx workbooks. That is 30 working combinations, and every one of them is handled by the same engines that power the individual converter pages, so the answers never disagree.</div>
+      </details>
+      <details>
+        <summary>Does the workbench detect the file format automatically?</summary>
+        <div class="answer">Yes. The workbench looks at the file extension first, then at the content itself: text starting with an angle bracket is XML, text that parses as a single JSON document is JSON, a file where every line is its own JSON object is JSON Lines, and text that parses as a YAML mapping is YAML. Anything left over is treated as CSV or TSV, with the delimiter detected from the header row. You can always override the source format by hand if the guess is wrong.</div>
+      </details>
+      <details>
+        <summary>Is my data uploaded anywhere?</summary>
+        <div class="answer">No. Parsing, flattening and serialisation all happen on your own machine using JavaScript. Your file is read with the browser's FileReader API and never transmitted to a server. There is no backend on HopConvert that could see your data, and no analytics script runs during a conversion.</div>
+      </details>
+      <details>
+        <summary>Is the Excel output a real spreadsheet?</summary>
+        <div class="answer">Yes. The Excel target generates a genuine .xlsx workbook — a zipped SpreadsheetML file — in your browser. Numbers stay numbers and booleans stay booleans, so a leading-zero postcode or a long account number does not get mangled the way it would in a plain CSV import.</div>
+      </details>
+      <details>
+        <summary>What happens to nested objects and arrays?</summary>
+        <div class="answer">When a tabular target such as CSV, Excel, SQL or Markdown is chosen, nested objects are flattened into one column per leaf and nested keys are joined with a double underscore, so <code>address.city</code> becomes <code>address__city</code>. Arrays of simple values are joined with a pipe, so a list of skills becomes <code>SQL | Python</code>. When JSON or YAML is the target, the original structure is preserved exactly as it came in.</div>
+      </details>
+      <details>
+        <summary>Is the workbench free?</summary>
+        <div class="answer">Yes. The HopConvert Workbench is 100% free with no sign-up, no paid tier and no feature gates. Every converter on the site is free forever, because the work happens in your browser and there is no server bill to pass on.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="padding-top: 32px;">
+  <div class="container">
+    <div class="cta-band">
+      <h2>Drop a file in and see</h2>
+      <p>Free, fast, and private. No sign-up. Your data never leaves your browser.</p>
+      <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+        <a href="#convert" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          Open the workbench
+        </a>
+        <a href="#faq" class="btn btn-secondary">Read the FAQ</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <a href="index.html" class="logo" style="color: white;" aria-label="HopConvert home">
+          <svg class="logo-mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="logoGradF" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#60A5FA"/>
+                <stop offset="1" stop-color="#2563EB"/>
+              </linearGradient>
+            </defs>
+            <ellipse cx="35" cy="25" rx="8" ry="20" fill="url(#logoGradF)"/>
+            <ellipse cx="65" cy="25" rx="8" ry="20" fill="url(#logoGradF)"/>
+            <circle cx="50" cy="60" r="25" fill="url(#logoGradF)"/>
+            <ellipse cx="35" cy="25" rx="3" ry="12" fill="#1E293B"/>
+            <ellipse cx="65" cy="25" rx="3" ry="12" fill="#1E293B"/>
+            <circle cx="42" cy="58" r="2.5" fill="#1E3A8A"/>
+            <circle cx="58" cy="58" r="2.5" fill="#1E3A8A"/>
+            <ellipse cx="50" cy="66" rx="2" ry="1.5" fill="#1E3A8A"/>
+          </svg>
+          <span style="color: white;">HopConvert</span>
+        </a>
+        <p>Free online tools for converting JSON, CSV, XML, YAML, and SQL. Built for developers, analysts, and data teams who care about speed and privacy.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Converters</h4>
+        <ul>
+          <li><a href="index.html">JSON to CSV</a></li>
+          <li><a href="csv-to-json.html">CSV to JSON</a></li>
+          <li><a href="xml-to-csv.html">XML to CSV</a></li>
+          <li><a href="json-to-yaml.html">JSON to YAML</a></li>
+          <li><a href="yaml-to-json.html">YAML to JSON</a></li>
+          <li><a href="jsonl-to-csv.html">JSONL to CSV</a></li>
+          <li><a href="json-to-sql.html">JSON to SQL</a></li>
+          <li><a href="json-to-markdown.html">JSON to Markdown</a></li>
+          <li><a href="json-to-excel.html">JSON to Excel</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Guides</h4>
+        <ul>
+          <li><a href="json-to-csv-guide.html">JSON to CSV guide</a></li>
+          <li><a href="csv-to-json-guide.html">CSV to JSON guide</a></li>
+          <li><a href="xml-to-csv-guide.html">XML to CSV guide</a></li>
+          <li><a href="json-to-yaml-guide.html">JSON to YAML guide</a></li>
+          <li><a href="yaml-to-json-guide.html">YAML to JSON guide</a></li>
+          <li><a href="jsonl-to-csv-guide.html">JSONL to CSV guide</a></li>
+          <li><a href="json-to-sql-guide.html">JSON to SQL guide</a></li>
+          <li><a href="json-to-markdown-guide.html">JSON to Markdown guide</a></li>
+          <li><a href="json-to-excel-guide.html">JSON to Excel guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>By task</h4>
+        <ul>
+          <li><a href="json-to-csv-python.html">JSON to CSV in Python</a></li>
+          <li><a href="json-array-to-csv.html">JSON array to CSV</a></li>
+          <li><a href="json-to-csv-nested-objects.html">JSON to CSV nested objects</a></li>
+          <li><a href="json-to-csv-without-uploading.html">JSON to CSV without uploading</a></li>
+          <li><a href="json-to-csv-excel.html">JSON to CSV for Excel</a></li>
+          <li><a href="yaml-to-json-kubernetes.html">YAML to JSON for Kubernetes</a></li>
+          <li><a href="xml-to-csv-rss.html">XML to CSV for RSS</a></li>
+          <li><a href="csv-to-json-type-inference.html">CSV to JSON type inference</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2024–2026 HopConvert. All rights reserved.</span>
+      <div style="display: flex; gap: 20px;">
+        <a href="workbench.html">Workbench</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Settings modal -->
+<div class="modal-backdrop" id="settingsModal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="settingsTitle">Workbench settings</h3>
+      <button class="icon-btn" id="closeSettings" aria-label="Close settings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="field">
+        <label for="wbInDelim">Input delimiter</label>
+        <select id="wbInDelim"></select>
+      </div>
+      <div class="field">
+        <label for="wbSqlDialect">SQL dialect</label>
+        <select id="wbSqlDialect">
+          <option value="postgres" selected>PostgreSQL / ANSI (double quotes)</option>
+          <option value="mysql">MySQL (backticks)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="wbSqlTable">SQL table name</label>
+        <input type="text" id="wbSqlTable" value="users" spellcheck="false" autocomplete="off" />
+      </div>
+      <div class="field">
+        <label for="wbYamlIndent">YAML indent</label>
+        <select id="wbYamlIndent">
+          <option value="2" selected>2 spaces</option>
+          <option value="4">4 spaces</option>
+          <option value="3">3 spaces</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="wbMdAlign">Markdown alignment</label>
+        <select id="wbMdAlign">
+          <option value="auto" selected>Auto (numbers right-aligned)</option>
+          <option value="left">Left</option>
+          <option value="center">Center</option>
+          <option value="right">Right</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="wbSheetName">Excel sheet name</label>
+        <input type="text" id="wbSheetName" value="Sheet1" spellcheck="false" autocomplete="off" />
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" id="closeSettingsFoot" type="button">Close</button>
+      <button class="btn btn-primary" id="applySettings" type="button">Apply</button>
+    </div>
+  </div>
+</div>
+
+<script src="workbench.js?v=20261115-1"></script>
+</body>
+</html>

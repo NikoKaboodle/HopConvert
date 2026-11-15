@@ -648,3 +648,45 @@ section .lede { color: var(--ink-700); font-size: 1.05rem; max-width: 640px; mar
   font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
   color: var(--ink-500); margin: 0 0 8px;
 }
+
+/* ---------- Workbench: source / target bar ---------- */
+.wb-formats {
+  display: flex; align-items: flex-end; gap: 14px; flex-wrap: wrap;
+  padding: 14px 16px; background: var(--ink-50);
+  border-bottom: 1px solid var(--ink-200);
+}
+.wb-field { display: flex; flex-direction: column; gap: 5px; }
+.wb-field label {
+  font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--ink-500);
+}
+.wb-field select {
+  min-width: 170px; padding: 8px 10px;
+  border: 1px solid var(--ink-200); border-radius: var(--radius-sm);
+  background: var(--white); color: var(--ink-900);
+  font-family: inherit; font-size: 0.88rem; font-weight: 600; cursor: pointer;
+}
+.wb-field select:focus {
+  outline: none; border-color: var(--blue-500); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+.wb-arrow { align-self: center; margin-top: 14px; width: 22px; height: 22px; color: var(--blue-500); }
+.wb-arrow svg { width: 100%; height: 100%; }
+.wb-detected {
+  margin-left: auto; align-self: center;
+  font-size: 0.75rem; font-weight: 600; color: var(--ink-500);
+  background: var(--white); border: 1px solid var(--ink-200);
+  border-radius: 999px; padding: 5px 12px; white-space: nowrap;
+}
+@media (max-width: 720px) {
+  .wb-formats { gap: 10px; }
+  .wb-field { flex: 1 1 130px; }
+  .wb-field select { min-width: 0; width: 100%; }
+  .wb-arrow { display: none; }
+  .wb-detected { margin-left: 0; width: 100%; text-align: center; }
+}
+
+/* ---------- Workbench: format matrix ---------- */
+.wb-matrix { max-width: 900px; margin: 0 auto 40px; }
+.wb-matrix th:not(:first-child), .wb-matrix td:not(:first-child) { text-align: center; width: auto; }
+.wb-matrix td:first-child { width: 24%; }
+.wb-matrix .yes { font-size: 0.8rem; }

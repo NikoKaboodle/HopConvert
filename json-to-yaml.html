@@ -27,9 +27,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="style.css?v=20261112-5" />
+<link rel="stylesheet" href="style.css?v=20261115-1" />
 <script src="nav.js" defer></script>
 <script src="hop-common.js?v=20261112-3"></script>
+<script src="hop-yaml.js?v=20261115-1"></script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2033283931778605" crossorigin="anonymous"></script>
 
 <script type="application/ld+json">
@@ -253,8 +254,8 @@
             <a href="csv-to-json-type-inference.html">CSV to JSON type inference</a>
           </div>
         </div>
-        </div>
       </div>
+      <a href="workbench.html">Workbench</a>
       <a href="#faq">FAQ</a>
       <a href="#convert" class="nav-cta">Convert Now</a>
     </nav>
@@ -779,6 +780,7 @@ staging:
     <div class="footer-bottom">
       <span>&copy; 2024–2026 HopConvert. All rights reserved.</span>
       <div style="display: flex; gap: 20px;">
+        <a href="workbench.html">Workbench</a>
         <a href="privacy.html">Privacy</a>
         <a href="terms.html">Terms</a>
       </div>
@@ -901,109 +903,12 @@ staging:
     }
   };
 
-  // ============ YAML SERIALIZER ============
-  const RESERVED_KEYS = new Set(['true','false','null','yes','no','on','off','~']);
-  const YAML_SPECIAL = /[:#&*!|>'"%@`{}\[\],]|^\s|\s$|^\d/;
-
-  function isPlainSafe(s) {
-    if (s === '') return false;
-    if (YAML_SPECIAL.test(s)) return false;
-    if (RESERVED_KEYS.has(s.toLowerCase())) return false;
-    if (/^-?\d+(\.\d+)?([eE][-+]?\d+)?$/.test(s)) return false;
-    return true;
-  }
-
-  function escapeString(s) {
-    return s.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '\\r').replace(/\t/g, '\\t');
-  }
-
-  function dumpValue(value, indent, opts) {
-    if (value === null || value === undefined) return 'null';
-    if (typeof value === 'boolean') return value ? 'true' : 'false';
-    if (typeof value === 'number') {
-      if (!isFinite(value)) return 'null';
-      return String(value);
-    }
-    if (typeof value === 'string') {
-      if (value.includes('\n') && value.length > 40) {
-        // Use literal block scalar
-        const ind = ' '.repeat(indent + opts.indent);
-        const lines = value.split('\n').map(l => l.length === 0 ? '' : l).join('\n' + ind);
-        return '|\n' + ind + lines;
-      }
-      if (opts.quoteAll || !isPlainSafe(value)) return '"' + escapeString(value) + '"';
-      return value;
-    }
-    if (Array.isArray(value)) {
-      if (value.length === 0) return '[]';
-      return dumpArray(value, indent, opts);
-    }
-    if (typeof value === 'object') {
-      const keys = Object.keys(value);
-      if (keys.length === 0) return '{}';
-      return dumpObject(value, indent, opts);
-    }
-    return 'null';
-  }
-
-  function dumpArray(arr, indent, opts) {
-    const sp = ' '.repeat(indent);
-    const inner = ' '.repeat(indent + opts.indent);
-    const lines = [];
-    for (const item of arr) {
-      const isComplex = (Array.isArray(item) && item.length > 0) || (item && typeof item === 'object' && Object.keys(item).length > 0);
-      if (isComplex) {
-        const v = dumpValue(item, indent + opts.indent, opts);
-        const firstNewline = v.indexOf('\n');
-        if (firstNewline === -1) {
-          lines.push(sp + '- ' + v);
-        } else {
-          lines.push(sp + '- ' + v.slice(0, firstNewline) + v.slice(firstNewline).split('\n').map((l, i) => i === 0 ? l : inner + l).join('\n'));
-        }
-      } else {
-        lines.push(sp + '- ' + dumpValue(item, indent, opts));
-      }
-    }
-    return lines.join('\n');
-  }
-
-  function dumpObject(obj, indent, opts) {
-    const sp = ' '.repeat(indent);
-    const inner = ' '.repeat(indent + opts.indent);
-    let keys = Object.keys(obj);
-    if (!opts.preserveOrder || opts.sortKeys) {
-      keys.sort();
-    } else if (opts.preserveOrder) {
-      // Keep insertion order
-    }
-    const lines = [];
-    for (const k of keys) {
-      const v = obj[k];
-      const keyStr = isPlainSafe(k) ? k : '"' + escapeString(k) + '"';
-      const isComplex = (Array.isArray(v) && v.length > 0) || (v && typeof v === 'object' && Object.keys(v).length > 0);
-      if (isComplex) {
-        const dv = dumpValue(v, indent + opts.indent, opts);
-        const firstNewline = dv.indexOf('\n');
-        if (firstNewline === -1) {
-          lines.push(sp + keyStr + ':\n' + inner + dv);
-        } else {
-          lines.push(sp + keyStr + ':');
-          lines.push(dv);
-        }
-      } else {
-        lines.push(sp + keyStr + ': ' + dumpValue(v, indent, opts));
-      }
-    }
-    return lines.join('\n');
-  }
-
   function jsonToYaml(text, opts) {
     let parsed;
     // A UTF-8 BOM is not valid JSON and would otherwise break the parse.
     try { parsed = JSON.parse(String(text).replace(/^\uFEFF/, '')); }
     catch (e) { throw new Error('JSON parse error: ' + e.message); }
-    if (opts.sortKeys) opts.preserveOrder = false;
-    return dumpValue(parsed, 0, opts);
+    return window.HopYaml.dump(parsed, opts);
   }
 
   function countKeys(value) {
