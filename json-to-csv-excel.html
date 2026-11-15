@@ -402,8 +402,10 @@ with open("data.json", encoding="utf-8") as f:
     rows = json.load(f)
 
 # utf-8-sig writes the BOM that makes Excel read UTF-8 correctly on Windows.
+fieldnames = list(dict.fromkeys(k for row in rows for k in row))
+
 with open("data.csv", "w", newline="", encoding="utf-8-sig") as f:
-    writer = csv.DictWriter(f, fieldnames=rows[0].keys())
+    writer = csv.DictWriter(f, fieldnames=fieldnames, restval="")
     writer.writeheader()
     writer.writerows(rows)</code></pre>
     <p class="code-caption">Option 1 - a CSV that Excel opens cleanly (UTF-8 with a BOM)</p>
@@ -419,7 +421,7 @@ wb = Workbook()
 ws = wb.active
 ws.title = "data"
 
-headers = list(rows[0].keys())
+headers = list(dict.fromkeys(k for row in rows for k in row))
 ws.append(headers)
 for cell in ws[1]:
     cell.font = Font(bold=True)
@@ -435,7 +437,7 @@ for row in ws.iter_rows(min_row=2, min_col=1):
 
 wb.save("data.xlsx")</code></pre>
     <p class="code-caption">Option 2 - a real .xlsx workbook with the column types set</p>
-<p>The <code>utf-8-sig</code> encoding in option 1 is the whole trick for Excel on Windows: it writes the three-byte byte order mark that tells Excel the file is UTF-8 instead of the local code page. Without it, a name like "ZoÃ«" arrives as "ZoÃƒÂ«".</p><p>Option 2 is worth the extra dependency when the file has to be handed to someone who will edit it - the number formats are set once, so nobody has to fix the columns by hand.</p>
+<p>The <code>utf-8-sig</code> encoding in option 1 is the whole trick for Excel on Windows: it writes the three-byte byte order mark that tells Excel the file is UTF-8 instead of the local code page. Without it, a name like "Zoë" arrives as "ZoÃ«".</p><p>Option 2 is worth the extra dependency when the file has to be handed to someone who will edit it - the number formats are set once, so nobody has to fix the columns by hand.</p>
   </div>
 </section>
 
@@ -464,16 +466,16 @@ wb.save("data.xlsx")</code></pre>
       <div>
         <p class="code-label">customers.json</p>
         <pre class="code-block"><code>[
-  { "name": "ZoÃ« MÃ¼ller", "postcode": "01234", "id": 1000000000000001 }
+  { "name": "Zoë Müller", "postcode": "01234", "id": 1000000000000001 }
 ]</code></pre>
       </div>
       <div>
         <p class="code-label">customers.csv</p>
         <pre class="code-block"><code>name,postcode,id
-ZoÃ« MÃ¼ller,01234,1000000000000001</code></pre>
+Zoë Müller,01234,1000000000000001</code></pre>
       </div>
     </div>
-<p style="color: var(--ink-700); margin-top: 24px;">Written as plain UTF-8, Excel on Windows shows The converter above defaults to a tab delimiter so the file pastes straight into Excel - switch it to comma in the settings to match this example. "ZoÃƒÂ« MÃƒÂ¼ller". The file above is written as <code>utf-8-sig</code>, so it shows "ZoÃ« MÃ¼ller". The second problem - Excel turning <code>01234</code> into the number 1234 and <code>1000000000000001</code> into scientific notation - is a display setting on import, which the guide below explains.</p>
+<p style="color: var(--ink-700); margin-top: 24px;">The converter above defaults to a tab delimiter so the file pastes straight into Excel - switch it to comma in the settings to match this example. Written as plain UTF-8, Excel on Windows shows "ZoÃ« MÃ¼ller". The file above is written as <code>utf-8-sig</code>, so it shows "Zoë Müller". The second problem - Excel turning <code>01234</code> into the number 1234 and <code>1000000000000001</code> into scientific notation - is a display setting on import, which the guide below explains.</p>
   </div>
 </section>
 
@@ -631,14 +633,14 @@ ZoÃ« MÃ¼ller,01234,1000000000000001</code></pre>
         <a href="index.html" class="logo" style="color: white;" aria-label="HopConvert home">
           <svg class="logo-mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
   <defs>
-    <linearGradient id="logoGrad" x1="0" y1="0" x2="1" y2="1">
+    <linearGradient id="logoGradFoot" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#60A5FA"/>
       <stop offset="1" stop-color="#2563EB"/>
     </linearGradient>
   </defs>
-  <ellipse cx="35" cy="25" rx="8" ry="20" fill="url(#logoGrad)"/>
-  <ellipse cx="65" cy="25" rx="8" ry="20" fill="url(#logoGrad)"/>
-  <circle cx="50" cy="60" r="25" fill="url(#logoGrad)"/>
+  <ellipse cx="35" cy="25" rx="8" ry="20" fill="url(#logoGradFoot)"/>
+  <ellipse cx="65" cy="25" rx="8" ry="20" fill="url(#logoGradFoot)"/>
+  <circle cx="50" cy="60" r="25" fill="url(#logoGradFoot)"/>
   <ellipse cx="35" cy="25" rx="3" ry="12" fill="#1E293B"/>
   <ellipse cx="65" cy="25" rx="3" ry="12" fill="#1E293B"/>
   <circle cx="42" cy="58" r="2.5" fill="#1E3A8A"/>

@@ -48,6 +48,7 @@ _server.err
 # Local test harnesses and one-shot patch scripts (not part of the site)
 adversarial.html
 _adtest.html
+_landingcheck.html
 regress.html
 privacydiag.html
 patch-index.ps1
@@ -66,3 +67,5 @@ build-landing.ps1
 patch-examples.ps1
 patch-xml-attrs.ps1
 patch-adbox.ps1
+bugscan.ps1
+patch-fixes.ps1
